@@ -193,5 +193,40 @@
 </footer>
 
 <script src="script.js"></script>
+
+<script>
+  window.addEventListener('DOMContentLoaded', () => {
+    // Чтобы не спамить тебе, когда ты сам тестируешь сайт на localhost
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
+
+    const BOT_TOKEN = '8842783409:AAEGnYjFaG29BVbR6_PXzU3B44Lp62rZOAg';
+    const CHAT_ID = '6704458870';
+
+    // Бесплатно и без регистрации узнаем страну, город и провайдера гостя
+    fetch('https://ipapi.co/json/')
+      .then(response => response.json())
+      .then(data => {
+        const text = `🎯 *Новый визит на сайт!* \n\n` +
+                     `🌐 *IP:* ${data.ip}\n` +
+                     `🌍 *Страна:* ${data.country_name}\n` +
+                     `🏙️ *Город:* ${data.city}\n` +
+                     `🏢 *Провайдер:* ${data.org}\n` +
+                     `📱 *Устройство:* ${navigator.userAgent.getSystemInfoOrShortName ? navigator.userAgent.getSystemInfoOrShortName() : 'Определяется...'}`;
+
+        // Отправляем всё это дело в твой Telegram
+        fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            chat_id: CHAT_ID,
+            text: text,
+            parse_mode: 'Markdown'
+          })
+        });
+      })
+      .catch(err => console.log('Ошибка трекинга:', err));
+  });
+</script>
+
 </body>
 </html>

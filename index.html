@@ -22,7 +22,7 @@
   <div class="shape shape-2"></div>
 </div>
 
-<!-- ШАПКА САЙТА -->
+<!-- ШАПКА САЙТА (для проверки меню) -->
 <header class="header">
   <div class="container header-wrap">
     <a href="#" class="logo">
@@ -31,6 +31,7 @@
     <nav class="nav">
       <a href="#short-form">Короткий формат</a>
       <a href="#long-form">Длинный формат</a>
+      <a href="#reviews">Отзывы</a>
       <a href="#about">Обо мне</a>
     </nav>
     <a href="https://t.me/zhekalkin" target="_blank" class="nav-cta">Заказать услугу</a>
@@ -147,6 +148,39 @@
   </div>
 </section>
 
+<!-- REVIEWS (ОТЗЫВЫ) -->
+<section id="reviews" class="container section fade">
+  <h2>Отзывы и репутация</h2>
+  
+  <div class="reviews-wrapper">
+    
+    <!-- Карточка Kwork (Где почитать отзывы) -->
+    <div class="kwork-box">
+      <div class="kwork-badge">Узнать мнение клиентов</div>
+      <h3>Читайте честные отзывы на Kwork</h3>
+      <p>Я ценю прозрачность. Все оценки, история заказов и детальные разборы моих работ от реальных заказчиков собраны на моей официальной странице биржи.</p>
+      
+      <div class="kwork-benefits">
+        <div class="kwork-benefit-item">⭐️ Высокий рейтинг и оценки</div>
+        <div class="kwork-benefit-item">🔒 Безопасная сделка для вашего спокойствия</div>
+      </div>
+      
+      <a href="https://kwork.ru/user/shikhanov_edit" target="_blank" class="kwork-btn">
+        <span>Посмотреть профиль на Kwork</span>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <!-- Карточка Telegram (Где оставить отзыв) -->
+    <div class="tg-review-box">
+      <h3>Работали вместе?</h3>
+      <p>Поделитесь своим впечатлением от сотрудничества прямо в мессенджере. Ваш фидбек помогает делать монтаж еще круче!</p>
+      <a href="https://t.me/shikhanov_portfolio/9" target="_blank" class="tg-review-btn">Оставить отзыв в Telegram</a>
+    </div>
+
+  </div>
+</section>
+
 <!-- ABOUT -->
 <section id="about" class="container section fade">
   <div class="about-card">
@@ -196,13 +230,11 @@
 
 <script>
   window.addEventListener('DOMContentLoaded', () => {
-    // Чтобы не спамить тебе, когда ты сам тестируешь сайт на localhost
     if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') return;
 
     const BOT_TOKEN = '8842783409:AAEGnYjFaG29BVbR6_PXzU3B44Lp62rZOAg';
     const CHAT_ID = '6704458870';
 
-    // Бесплатно и без регистрации узнаем страну, город и провайдера гостя
     fetch('https://ipapi.co/json/')
       .then(response => response.json())
       .then(data => {
@@ -213,7 +245,6 @@
                      `🏢 *Провайдер:* ${data.org}\n` +
                      `📱 *Устройство:* ${navigator.userAgent.getSystemInfoOrShortName ? navigator.userAgent.getSystemInfoOrShortName() : 'Определяется...'}`;
 
-        // Отправляем всё это дело в твой Telegram
         fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
